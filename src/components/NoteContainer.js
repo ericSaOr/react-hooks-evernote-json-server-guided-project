@@ -4,11 +4,16 @@ import Sidebar from "./Sidebar";
 import Content from "./Content";
 
 function NoteContainer() {
+  
   const [notes, setNotes] = useState([]);
+  const [displayNotes, setDisplayNotes] = useState([]);
   const [contents, setContents] = useState([]);
+  // const [search , setSearch] = useState('');
   useEffect(()=>{
     const url = "http://localhost:3000/notes";
-    fetch(url).then(res => res.json()).then(everData =>setNotes(everData))
+    fetch(url).then(res => res.json()).then(everData =>{setNotes(everData)
+    setDisplayNotes(everData)
+    })
   },[])
 
   function getContent(title){
@@ -18,17 +23,23 @@ function NoteContainer() {
       setContents(contentsFilter)
     }
 
-  console.log(notes)
+    const searchNotes = (search)=> {
+      let filteredNotes = notes.filter((note) =>note.title.toLowerCase().includes(search));
+      setDisplayNotes(filteredNotes);
+    }
 
+    // const createNotes = (...notes)
+  
   return (
     <>
-      <Search />
+      <Search setSearch = {searchNotes} />
       <div className="container">
-        <Sidebar notes = {notes} 
+        <Sidebar notes = {displayNotes} 
        getContent = {getContent}
         
         />
         <Content notes = {notes}
+      
         contents = {contents}/>
       </div>
     </>

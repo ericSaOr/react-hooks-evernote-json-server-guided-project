@@ -10,12 +10,12 @@ import Instructions from './Instructions';
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
-function Content({contents}) {
+function Content({ contents }) {
 	const getContent = () => {
 		// if (false) {
 		//   return <NoteEditor />;
 		// } else if (false) {
-		return contents.map((content) => <NoteViewer title={content.title} body={content.body} />);
+		return contents.map((content) => <NoteViewer key={content.id} title={content.title} body={content.body} />);
 		//   } else {
 		//     return <Instructions />;
 		//   }
