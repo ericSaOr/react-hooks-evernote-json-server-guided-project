@@ -1,7 +1,7 @@
-import React from "react";
-import NoteEditor from "./NoteEditor";
-import NoteViewer from "./NoteViewer";
-import Instructions from "./Instructions";
+import React from 'react';
+import NoteEditor from './NoteEditor';
+import NoteViewer from './NoteViewer';
+import Instructions from './Instructions';
 
 /*
   Advice: If you cannot figure out how to get this component to work,
@@ -10,18 +10,18 @@ import Instructions from "./Instructions";
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
-function Content() {
-  const getContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
-    } else {
-      return <Instructions />;
-    }
-  };
+function Content({contents}) {
+	const getContent = () => {
+		// if (false) {
+		//   return <NoteEditor />;
+		// } else if (false) {
+		return contents.map((content) => <NoteViewer title={content.title} body={content.body} />);
+		//   } else {
+		//     return <Instructions />;
+		//   }
+	};
 
-  return <div className="master-detail-element detail">{getContent()}</div>;
+	return <div className="master-detail-element detail">{getContent()}</div>;
 }
 
 export default Content;

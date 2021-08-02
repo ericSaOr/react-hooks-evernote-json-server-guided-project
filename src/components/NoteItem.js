@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from 'react';
+import NoteViewer from './NoteViewer';
 
-function NoteItem() {
-  return (
-    <li>
-      <h2>Title</h2>
-      <p>Caption...</p>
-    </li>
-  );
+function NoteItem({ title, body, getContent }) {
+	return (
+		<li onClick={() => getContent(title)}>
+			<h2>{title}</h2>
+			<p>{body.slice(0, 20) + '...'}</p>
+		</li>
+	);
 }
 
 export default NoteItem;

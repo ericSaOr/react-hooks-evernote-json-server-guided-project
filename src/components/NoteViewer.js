@@ -1,10 +1,11 @@
 import React from "react";
 
-function NoteViewer() {
+function NoteViewer({title, body}) {
+  console.log(title)
   return (
     <>
-      <h2>Title</h2>
-      <p>Body</p>
+      <h2>{title}</h2>
+      <p>{body}</p>
       <button>Edit</button>
     </>
   );
