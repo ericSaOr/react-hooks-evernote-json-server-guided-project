@@ -8,6 +8,7 @@ function NoteContainer() {
   const [notes, setNotes] = useState([]);
   const [displayNotes, setDisplayNotes] = useState([]);
   const [contents, setContents] = useState([]);
+  // const [isClicked, setClicked] = useState(false);
   // const [search , setSearch] = useState('');
   useEffect(()=>{
     const url = "http://localhost:3000/notes";
@@ -22,13 +23,26 @@ function NoteContainer() {
 
       setContents(contentsFilter)
     }
-
+    //filter through notes by title.
+    //.toLowerCase so it's not case sensitive.
+    //.includes passing the search parameter.
+    //setting the filtered notes to state.
     const searchNotes = (search)=> {
       let filteredNotes = notes.filter((note) =>note.title.toLowerCase().includes(search));
       setDisplayNotes(filteredNotes);
     }
 
-    // const createNotes = (...notes)
+    // function handleClick (){
+    //   setClick = false
+
+    // }
+
+    function createNote (){
+
+    }
+
+    
+  
   
   return (
     <>
