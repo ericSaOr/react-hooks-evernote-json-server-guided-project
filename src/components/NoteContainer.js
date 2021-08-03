@@ -32,10 +32,8 @@ function NoteContainer() {
       setDisplayNotes(filteredNotes);
     }
 
-    // function handleClick (){
-    //   setClick = false
-
-    // }
+    
+    
 
     function createNote (){
 
