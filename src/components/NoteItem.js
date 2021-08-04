@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import NoteViewer from './NoteViewer';
 
-function NoteItem({ title, body, getContent }) {
+function NoteItem({ note, getContent }) {
 	return (
-		<li onClick={() => getContent(title)}>
-			<h2>{title}</h2>
-			<p>{body.slice(0, 20) + '...'}</p>
+		<li onClick={() => getContent(note)}>
+			<h2>{note.title}</h2>
+			<p>{note.body.slice(0, 20) + '...'}</p>
 		</li>
 	);
 }

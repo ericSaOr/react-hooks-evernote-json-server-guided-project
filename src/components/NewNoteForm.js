@@ -1,9 +1,7 @@
 import NoteContainer from './NoteContainer';
 
 function NewNoteForm() {
-	return <div>hi
-        
-    </div>;
+	return <div>0</div>;
 }
 
 export default NewNoteForm;

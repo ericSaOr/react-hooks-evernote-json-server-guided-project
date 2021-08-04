@@ -10,15 +10,19 @@ import Instructions from './Instructions';
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
-function Content({ contents }) {
+function Content({ note, newNote }) {
+	//passing a note to content that starts out as null
+	// passing newNote who's state is assigned and empty object which has a truthy value.
+
 	const getContent = () => {
-		// if (false) {
-		//   return <NoteEditor />;
-		// } else if (false) {
-		return contents.map((content) => <NoteViewer key={content.id} title={content.title} body={content.body} />);
-		//   } else {
-		//     return <Instructions />;
-		//   }
+		if (newNote) {
+			return <NoteEditor note={note} />;
+		} else if (note) {
+			//So this won't fire.
+			return <NoteViewer key={note.id} title={note.title} body={note.body} />;
+		} else {
+			return <Instructions />;
+		}
 	};
 
 	return <div className="master-detail-element detail">{getContent()}</div>;

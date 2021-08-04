@@ -7,7 +7,8 @@ function NoteContainer() {
   
   const [notes, setNotes] = useState([]);
   const [displayNotes, setDisplayNotes] = useState([]);
-  const [contents, setContents] = useState([]);
+  const [contents, setContents] = useState(null);
+  const [newNotes, setNewNotes] = useState({});
   // const [isClicked, setClicked] = useState(false);
   // const [search , setSearch] = useState('');
   useEffect(()=>{
@@ -17,11 +18,12 @@ function NoteContainer() {
     })
   },[])
 
-  function getContent(title){
-    const contentsFilter = notes.filter(content => 
-     content.title === title);
+  function getContent(note){
+    setContents(note);
+    }
 
-      setContents(contentsFilter)
+    function newNoteFunction (newNote){
+      setNewNotes(newNote);
     }
     //filter through notes by title.
     //.toLowerCase so it's not case sensitive.
@@ -32,27 +34,17 @@ function NoteContainer() {
       setDisplayNotes(filteredNotes);
     }
 
-    
-    
 
-    function createNote (){
-
-    }
-
-    
-  
-  
-  return (
+    return (
     <>
       <Search setSearch = {searchNotes} />
       <div className="container">
         <Sidebar notes = {displayNotes} 
        getContent = {getContent}
+       note = {contents}
         
         />
-        <Content notes = {notes}
-      
-        contents = {contents}/>
+        <Content note = {contents} newNote = {newNoteFunction}/>
       </div>
     </>
   );
