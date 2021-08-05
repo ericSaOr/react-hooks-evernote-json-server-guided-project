@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NoteList from './NoteList';
 import NewNoteForm from './NewNoteForm';
 
-function Sidebar({ setNotes, notes, getContent }) {
+function Sidebar({ setNotes, notes, getContent, setDisplayEdit }) {
 	const [ isClicked, setClicked ] = useState(false);
 
 	//
@@ -22,7 +22,7 @@ function Sidebar({ setNotes, notes, getContent }) {
 
 	return (
 		<div className="master-detail-element sidebar">
-			<NoteList notes={notes} getContent={getContent} />
+			<NoteList notes={notes} getContent={getContent} setDisplayEdit={setDisplayEdit} />
 			<button onClick={handleClick}>New</button>
 		</div>
 	);

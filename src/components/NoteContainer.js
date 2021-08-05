@@ -6,18 +6,15 @@ import Content from "./Content";
 function NoteContainer() {
   
   const [notes, setNotes] = useState([]);
-  const [displayNotes, setDisplayNotes] = useState([]);
   const [displayNote, setDisplayNote] = useState(false);
+  const [search, setSearch] = useState('')
   const [displayEdit, setDisplayEdit] = useState(false);
-  const [search, setSearch] = useState([])
   const [note, setNote] = useState({});
  
-  // const [isClicked, setClicked] = useState(false);
-  // const [search , setSearch] = useState('');
+  
   useEffect(()=>{
     const url = "http://localhost:3000/notes";
     fetch(url).then(res => res.json()).then(everData =>{setNotes(everData)
-      setDisplayNotes(everData)
     })
   },[])
 
@@ -28,33 +25,41 @@ function NoteContainer() {
     
     }
 
-
-    // console.log(getContent)
-    //filter through notes by title.
-    //.toLowerCase so it's not case sensitive.
-    //.includes passing the search parameter.
-    //setting the filtered notes to state.
-    const searchNotes = (search)=> {
-      let filteredNotes = notes.filter((note) =>note.title.toLowerCase().includes(search));
-      setNotes(filteredNotes);
+    const searchNotes = (searchNote)=> setSearch(searchNote);
+    
+    
+  
+      
+  function potato (){
+    if (search.length > 0){
+      return notes.filter(note =>note.title.toLowerCase().includes(search));
     }
+
+    return notes;
+
+  }
+    
 
 // console.log(contents)
 // console.log(notes)
+
     return (
     <>
-      <Search searchNotes = {searchNotes} />
+      <Search searchNotes = {searchNotes}/>
       <div className="container">
-        <Sidebar notes = {notes} 
+        <Sidebar notes = {potato()} 
        getContent = {getContent} //function where state is set to one note.
         //This is one note.
        setNotes = {setNotes} 
+       setDisplayEdit= {setDisplayEdit}
+
+
         
         />
-        <Content note = {note} setNotes = {setNotes} displayNote = {displayNote} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setDisplayNote={setDisplayNote}/>
+        <Content notes = {notes} note = {note} setNotes = {setNotes} displayNote = {displayNote} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit}  getContent={getContent}/>
       </div>
     </>
   );
-}
+    }
 
 export default NoteContainer;

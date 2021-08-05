@@ -10,7 +10,7 @@ import Instructions from './Instructions';
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
-function Content({ setDisplayNote, displayNote, note, setNotes, displayEdit, setDisplayEdit }) {
+function Content({ setDisplayNote, displayNote, note, notes, setNotes, displayEdit, setDisplayEdit }) {
 	//passing a note to content that starts out as null
 	// passing newNote who's state is assigned and empty object which has a truthy value.
 
@@ -18,11 +18,13 @@ function Content({ setDisplayNote, displayNote, note, setNotes, displayEdit, set
 		if (displayEdit) {
 			return (
 				<NoteEditor
+					notes={notes}
 					note={note}
 					title={note.title}
 					body={note.body}
 					setNotes={setNotes}
 					setDisplayEdit={setDisplayEdit}
+					getContent={getContent}
 				/>
 			);
 		} else if (displayNote) {

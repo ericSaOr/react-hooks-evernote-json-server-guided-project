@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Search({ searchNotes }) {
+function Search({ searchNotes}) {
 	return (
 		<div className="filter">
 			<input

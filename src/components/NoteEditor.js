@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
 import NoteList from './NoteList';
 
-function NoteEditor({ setNotes, note, title, body, setDisplayEdit, setDisplayNote }) {
+function NoteEditor({ setNotes, note, title, body, setDisplayEdit }) {
 	// console.log(note);
-	const [ inputTitle, setInputTitle ] = useState('');
-	const [ inputBody, setInputBody ] = useState('');
+	const [ inputTitle, setInputTitle ] = useState(title);
+	const [ inputBody, setInputBody ] = useState(body);
 
-	function handleEdit() {
-		//   console.log('Fired!');
-		//   setNotes((prevNotes) => {
-		//     const spreadNotes = [ ...prevNotes ];
-		//     console.log(spreadNotes);
-		//     spreadNotes.push(defaultNote);
-		//     return spreadNotes;
-		//   });
-		// }
-		const newNote = { title: { inputTitle }, body: { inputBody } };
-		console.log('fired');
+	const newNote = { title: inputTitle, body: inputBody };
+	function handleEdit(e) {
+		e.preventDefault();
 		setNotes((prevNotes) => {
+			const index = prevNotes.indexOf(note);
 			const spreadNotes = [ ...prevNotes ];
-			spreadNotes.push(newNote);
+			spreadNotes[index] = newNote;
 			return spreadNotes;
 		});
-	}
-
-	function handleSave() {
-		console.log('saved!');
 	}
 
 	function handleCancel() {
@@ -34,10 +23,10 @@ function NoteEditor({ setNotes, note, title, body, setDisplayEdit, setDisplayNot
 
 	return (
 		<form onSubmit={handleEdit} className="note-editor">
-			<input onChange={(e) => setInputTitle(e.target.value)} type="text" name="title" placeholder={title} />
-			<textarea onChange={(e) => setInputBody(e.target.value)} type="text" name="body" placeholder={body} />
+			<input onChange={(e) => setInputTitle(e.target.value)} type="text" name="title" value={inputTitle} />
+			<textarea onChange={(e) => setInputBody(e.target.value)} type="text" name="body" value={inputBody} />
 			<div className="button-row">
-				<input onSubmit={handleSave} className="button" type="submit" value="Save" />
+				<input className="button" type="submit" value="Save" />
 				<button onClick={handleCancel} type="button">
 					Cancel
 				</button>
