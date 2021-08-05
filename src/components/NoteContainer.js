@@ -7,44 +7,51 @@ function NoteContainer() {
   
   const [notes, setNotes] = useState([]);
   const [displayNotes, setDisplayNotes] = useState([]);
-  const [contents, setContents] = useState(null);
-  const [newNotes, setNewNotes] = useState({});
+  const [displayNote, setDisplayNote] = useState(false);
+  const [displayEdit, setDisplayEdit] = useState(false);
+  const [search, setSearch] = useState([])
+  const [note, setNote] = useState({});
+ 
   // const [isClicked, setClicked] = useState(false);
   // const [search , setSearch] = useState('');
   useEffect(()=>{
     const url = "http://localhost:3000/notes";
     fetch(url).then(res => res.json()).then(everData =>{setNotes(everData)
-    setDisplayNotes(everData)
+      setDisplayNotes(everData)
     })
   },[])
 
+  //setting a state of a single note.
   function getContent(note){
-    setContents(note);
+    setNote(note);
+    setDisplayNote(true);
+    
     }
 
-    function newNoteFunction (newNote){
-      setNewNotes(newNote);
-    }
+
+    // console.log(getContent)
     //filter through notes by title.
     //.toLowerCase so it's not case sensitive.
     //.includes passing the search parameter.
     //setting the filtered notes to state.
     const searchNotes = (search)=> {
       let filteredNotes = notes.filter((note) =>note.title.toLowerCase().includes(search));
-      setDisplayNotes(filteredNotes);
+      setNotes(filteredNotes);
     }
 
-
+// console.log(contents)
+// console.log(notes)
     return (
     <>
-      <Search setSearch = {searchNotes} />
+      <Search searchNotes = {searchNotes} />
       <div className="container">
-        <Sidebar notes = {displayNotes} 
-       getContent = {getContent}
-       note = {contents}
+        <Sidebar notes = {notes} 
+       getContent = {getContent} //function where state is set to one note.
+        //This is one note.
+       setNotes = {setNotes} 
         
         />
-        <Content note = {contents} newNote = {newNoteFunction}/>
+        <Content note = {note} setNotes = {setNotes} displayNote = {displayNote} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setDisplayNote={setDisplayNote}/>
       </div>
     </>
   );

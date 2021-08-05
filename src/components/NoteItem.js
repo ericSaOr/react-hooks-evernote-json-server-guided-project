@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import NoteViewer from './NoteViewer';
 
-function NoteItem({ note, getContent }) {
+function NoteItem({ note, getContent, setDisplayEdit }) {
+	console.log(note);
+
 	return (
 		<li onClick={() => getContent(note)}>
 			<h2>{note.title}</h2>
@@ -11,3 +13,4 @@ function NoteItem({ note, getContent }) {
 }
 
 export default NoteItem;
+//

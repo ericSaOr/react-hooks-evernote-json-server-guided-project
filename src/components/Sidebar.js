@@ -2,19 +2,28 @@ import React, { useState } from 'react';
 import NoteList from './NoteList';
 import NewNoteForm from './NewNoteForm';
 
-function Sidebar({ newNote, notes, getContent }) {
+function Sidebar({ setNotes, notes, getContent }) {
 	const [ isClicked, setClicked ] = useState(false);
-	console.log(notes);
+
+	//
 	// console.log(getContent);
 	//event listener that when clicked the form pops up.
+	const defaultNote = { title: 'default', body: 'placeholder' };
+
 	function handleClick() {
-		setClicked(newNote);
+		console.log('Fired!');
+		setNotes((prevNotes) => {
+			const spreadNotes = [ ...prevNotes ];
+			console.log(spreadNotes);
+			spreadNotes.push(defaultNote);
+			return spreadNotes;
+		});
 	}
+
 	return (
 		<div className="master-detail-element sidebar">
 			<NoteList notes={notes} getContent={getContent} />
 			<button onClick={handleClick}>New</button>
-			/
 		</div>
 	);
 }
